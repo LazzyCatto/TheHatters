@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Профиль</h1>
+        <h6>name : {{ user.name }}</h6>
+        <h6>email : {{ user.email }}</h6>
+        <h2>My games</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Participating</h4>
+                {% for game in participated_games %}
+                    <div class="card mb-3">
+                        <form action="/leave_game/{{ game.id }}">
+                            <div class="card-header fw-bold">{{ game.title }}</div>
+                            <div class="card-body">
+                                <p class="badge bg-primary text-wrap">{{ game.organizer.name }}</p>
+                                <p class="card-text">Players ({{ game.min_player_count }} - {{ game.max_player_count }}) : 
+                                <strong>{{ game.player_count }}</strong></p>
+                                <p class="card-text">Dates: <br>
+                                from : <strong>{{ game.start_time }} </strong> <br>
+                                to : <strong> {{ game.end_time }} </strong> </p>
+                            </div>
+                            <button type="submit" class="btn btn-danger">Leave game</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <h4>Hosting</h4>
+                <a href="{{ url_for('add') }}" class="btn btn-primary">Create new game</a>
+                {% for game in created_games %}
+                    <div class="card mb-3">
+                        <form action="/delete/{{ game.id }}">
+                            <div class="card-header fw-bold">{{ game.title }}</div>
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <p class="card-text">Players ({{ game.min_player_count }} - {{ game.max_player_count }}) : 
+                                <strong>{{ game.player_count }}</strong></p>
+                                <p class="card-text">Dates: <br>
+                                from : <strong>{{ game.start_time }} </strong> <br>
+                                to : <strong> {{ game.end_time }} </strong> </p>
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

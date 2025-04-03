@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Leaving the game</h1>
+  <p>Do you realy want to leave "{{ game.title }}"?</p>
+  <form method="post">
+    <button type="submit" class="btn btn-danger">Leave</button>
+    <a href="{{ url_for('profile') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}

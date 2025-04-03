@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Gamse hosted
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Games hosted</h1>
+
+<div class="card-columns">
+  <div class="row">
+  {% for game in games %}
+    <div class="col-md-3">
+      <div class="card mb-3">
+        <form action="/join_game/{{ game.id }}" method="POST">
+            <div class="card-header fw-bold">{{ game.title }}</div>
+            <div class="card-body">
+                <p class="badge bg-primary text-wrap">{{ game.organizer.name }}</p>
+                <p class="card-text">Players ({{ game.min_player_count }} - {{ game.max_player_count }}) : 
+                <strong>{{ game.player_count }}</strong></p>
+                <p class="card-text">Dates: <br>
+                from : <strong>{{ game.start_time }} </strong> <br>
+                to : <strong> {{ game.end_time }} </strong> </p>
+            </div>
+            {% if user %}
+                {% if user.id == game.organizer_id %}
+                    <div class="card-body">
+                        <p class="text-muted">you are the organizer</p>
+                    </div>
+                {% else %}
+                    {% if user in game.participants %}
+                        <div class="card-body">
+                            <p class="text-muted">you are already in the game</p>
+                        </div>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">Join</button>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

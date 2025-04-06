@@ -1,0 +1,36 @@
+body {
+    background-color: #e5e5e5;
+}
+
+/* Сделаем цвет событий более ярким */
+.fc-event {
+    background-color: #ff7f50; /* Оранжевый */
+    border-color: #ff7f50; /* Оранжевый */
+}
+
+/* Изменим стиль события при наведении */
+.fc-event:hover {
+    background-color: #ff6347;
+    cursor: pointer;
+}
+
+.fc .fc-daygrid-day-number,
+.fc .fc-col-header-cell a {
+    color: inherit;          /* Наследовать цвет от родителя */
+    text-decoration: none;   /* Убрать подчёркивание */
+    font-weight: 500;        /* Можно сделать чуть жирнее, если нужно */
+}
+
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #ff7f50;
+    border-color: transparent;
+    color: #fff;
+}
+
+.daterangepicker td.in-range {
+    background-color: #ff7f5050;
+    border-color: transparent;
+    color: #000;
+    border-radius: 0;
+  }

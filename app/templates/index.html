@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block modals %}
+    {% set include_leave_modal = True %}
+    {% set include_delete_modal = True %}
+    {% include 'components/modals.html' %}
+{% endblock %}
+
+{% block title %}
+Gamse hosted
+{% endblock %}
+
+{% block content %}
+
+<body>
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card h-100 shadow-sm">
+                    <div class="card-header fw-bold" id="modal-event-title">Event Title</div>
+                    <div class="card-body">
+                        <span class="badge bg-primary" id="modal-organizer-name">Organizer Name</span>
+                        <p class="card-text mt-2" id="modal-players">Players (min - max): <strong id="modal-player-count">0</strong></p>
+                        <p class="card-text">Dates:<br>
+                        <strong>From:</strong> <span id="modal-start-time">00:00</span><br>
+                        <strong>To:</strong> <span id="modal-end-time">00:00</span>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <div id="modal-join" style="display: none;">
+                    <div class="modal-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-primary" id="modal-join-button">Join</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <div id="modal-register" style="display: none;">
+                    <div class="modal-footer d-flex justify-content-between">
+                        <span class="text-muted">please register first</span>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <div id="modal-joined" style="display: none;">
+                    <div class="modal-footer d-flex justify-content-between">
+                        <span class="text-muted">you are already joined</span>
+                        <div>
+                            <button type="button" class="btn btn-danger open-leave-modal" data-bs-toggle="modal" data-bs-target="#leaveModal" id="modal-leave-button">Leave</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal-organizer" style="display: none;">
+                    <div class="modal-footer d-flex justify-content-between">
+                        <span class="text-muted">you are the organizer</span>
+                        <div>
+                            <button type="button" class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteModal" id="modal-delete-button">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h1>Games hosted</h1>
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Подключаем FullCalendar -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+
+    <script>
+        var EVENTS = JSON.parse('{{ events | tojson }}');
+        console.log(EVENTS);
+    </script>
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+
+<script src="/static/js/popups.js"></script>
+
+{% endblock %}

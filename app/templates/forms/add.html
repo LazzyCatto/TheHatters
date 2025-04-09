@@ -3,42 +3,44 @@
 
 {% block content %}
 <div class="row justify-content-center mt-5">
-    <h1 class="text-center">Create new game</h1>
-    <div class="col-xs-12 col-sm-8 col-md-4 mt-1">
-        <form method="POST" action="{{ url_for('games.add') }}">
-            <div class="form-group required mt-2">
-                <label class="control-label required">Title:</label>
-                <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Your title">
-            </div>
-            <div class="form-group mt-2">
-                <label class="control-label">Description:</label>
-                <input type="text" name="last_name" id="last_name" class="form-control input-sm pb-5" placeholder="Your description">
-            </div>
-            <hr>
-            <div class="form-group">
-                <label class="control-label">Player count:</label>
-                <div class="row d-flex align-items-center mt-2">
-                    <input type="number" id="minPlayers" name="min_players" class="form-control col mx-2" placeholder="Min players" min="1" step="1" required>
-                    <span class="col-1 align-self-center">—</span>
-                    <input type="number" id="maxPlayers" name="max_players" class="form-control col mx-2" placeholder="Max players" min="1" step="1" required>
+    <div class="row container justify-content-center mt-5" style="max-width: 500px;">
+        <h1 class="text-center">Create new game</h1>
+        <div class="mt-1">
+            <form method="POST" action="{{ url_for('games.add') }}">
+                <div class="form-group required mt-2">
+                    <label class="control-label required">Title:</label>
+                    <input type="text" name="title" id="title" class="form-control input-sm" placeholder="Your title">
                 </div>
-            </div>
-            <div class="form-group mt-2 required">
-                <label class="control-label" for="password">Dates:</label>
-                <input type="text" name="datetimes" id="datetimes" class="form-control input-sm"/>
-            </div>
-            <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Require validation
-                </label>
-            </div>
-            
-            <div class="row mt-5">
-                <input type="submit" value="Cansel" class="btn btn-secondary btn-block col mx-2">
-                <input type="submit" value="Create game" class="btn btn-primary btn-block col mx-2">
-            </div>
-        </form>
+                <div class="form-group mt-2">
+                    <label class="control-label">Description:</label>
+                    <input type="text" name="description" id="descroption" class="form-control input-sm pb-5" placeholder="Your description">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">Player count:</label>
+                    <div class="row d-flex align-items-center mt-2">
+                        <input type="number" id="min-players" name="min_players" class="form-control col mx-2" placeholder="Min players" min="1" step="1" required>
+                        <span class="col-1 align-self-center">—</span>
+                        <input type="number" id="max-players" name="max_players" class="form-control col mx-2" placeholder="Max players" min="1" step="1" required>
+                    </div>
+                </div>
+                <div class="form-group mt-2 required">
+                    <label class="control-label" for="password">Dates:</label>
+                    <input type="text" name="datetimes" id="datetimes" class="form-control input-sm"/>
+                </div>
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" name="validation" id="validation">
+                    <label class="form-check-label" for="validation">
+                    Require validation
+                    </label>
+                </div>
+                
+                <div class="row mt-5">
+                    <a href="{{ url_for('user.profile') }}" class="btn btn-secondary btn-block col mx-2">Cancel</a>
+                    <input type="submit" value="Create game" class="btn btn-primary btn-block col mx-2">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -49,7 +51,7 @@
         startDate: moment().startOf('hour'),
         endDate: moment().startOf('hour').add(32, 'hour'),
         locale: {
-          format: 'M/DD hh:mm A'
+          format: 'YYYY/M/DD HH:mm'
         }
       });
     });

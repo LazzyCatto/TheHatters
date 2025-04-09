@@ -12,6 +12,15 @@ var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
         document.getElementById('modal-start-time').innerText = event.start.toLocaleString();
         document.getElementById('modal-end-time').innerText = event.end.toLocaleString();
 
+        // Добавляем описание, если есть
+        var description = event.extendedProps.description;
+        if (description) {
+            document.getElementById('modal-about-section').style.display = 'block';
+            document.getElementById('modal-about-text').innerText = description;
+        } else {
+            document.getElementById('modal-about-section').style.display = 'none';
+        }
+
         // Если пользователь может присоединиться
         var show = 'modal-join'
         if (event.extendedProps.registered) {

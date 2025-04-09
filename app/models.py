@@ -32,7 +32,7 @@ class User(db.Model, UserMixin):
     joined_games = db.relationship('Game', secondary=participants, backref=db.backref('participants', lazy='dynamic'))
 
     # Игры, в которые пользователь только зарегистрировался
-    pending_games = db.relationship('Game', secondary=participants, backref=db.backref('pending_participants', lazy='dynamic'))
+    pending_games = db.relationship('Game', secondary=pending_participants, backref=db.backref('pending_participants', lazy='dynamic'))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

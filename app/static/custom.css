@@ -1,5 +1,21 @@
 body {
-    background-color: #e5e5e5;
+    background-color: #e6bdcc;
+    background-image: url('/static/images/background.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Это сделает фон неподвижным */
+    min-height: 100vh;
+    padding-top: 65px;
+}
+
+.mainbody
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* Лёгкий полупрозрачный фон для контейнера */
+    border-radius: 20px; /* Скругляем углы */
+    padding: 40px; /* Отступы внутри контейнера */
+    width: 100%; /* Ширина 100% от родительского элемента */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
 }
 
 /* Сделаем цвет событий более ярким */
@@ -21,7 +37,6 @@ body {
     font-weight: 500;        /* Можно сделать чуть жирнее, если нужно */
 }
 
-
 .daterangepicker td.active, .daterangepicker td.active:hover {
     background-color: #ff7f50;
     border-color: transparent;
@@ -33,4 +48,26 @@ body {
     border-color: transparent;
     color: #000;
     border-radius: 0;
-  }
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    background-color: #000;
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    opacity: 0.2;
+}

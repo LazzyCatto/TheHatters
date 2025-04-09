@@ -25,6 +25,12 @@ Gamse hosted
                     <div class="card-header fw-bold" id="modal-event-title">Event Title</div>
                     <div class="card-body">
                         <span class="badge bg-primary" id="modal-organizer-name">Organizer Name</span>
+                        <div id="modal-about-section" style="display: none;">
+                            <hr>
+                            <p class="card-text mt-2"><strong>About:</strong></p>
+                            <p class="card-text", id="modal-about-text"></p>
+                            <hr>
+                        </div>
                         <p class="card-text mt-2" id="modal-players">Players (min - max): <strong id="modal-player-count">0</strong></p>
                         <p class="card-text">Dates:<br>
                         <strong>From:</strong> <span id="modal-start-time">00:00</span><br>
@@ -32,7 +38,7 @@ Gamse hosted
                         </p>
                     </div>
                     </div>
-                </div>
+                    </div>
                 <div id="modal-join" style="display: none;">
                     <div class="modal-footer d-flex justify-content-between">
                         <button type="button" class="btn btn-primary" id="modal-join-button">Join</button>
@@ -74,16 +80,13 @@ Gamse hosted
 
     <!-- Подключаем FullCalendar -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-
     <script>
         var EVENTS = JSON.parse('{{ events | tojson }}');
         console.log(EVENTS);
     </script>
     <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modals/join.js') }}"></script>
 </body>
 </html>
-
-<script src="/static/js/popups.js"></script>
 
 {% endblock %}

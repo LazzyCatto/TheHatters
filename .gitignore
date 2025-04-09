@@ -1,4 +1,3 @@
-instance/app.db
 migrations/
 __pycache__/
 keygen.py
